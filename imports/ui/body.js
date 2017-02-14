@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import { Tasks } from '../api/task.js'
+import { Tasks } from '../api/tasks.js'
 
 import './body.html';
 Template.body.helpers({
@@ -24,3 +24,11 @@ Template.body.events({
     target.text.value = '';
   },
 })
+Template.body.helpers({
+
+  tasks(){
+    //show newest tasks at the top
+    return Tasks.find({}, {sort: { createdAt: -1 } });
+
+  },
+});
